@@ -24,6 +24,7 @@ void status_line();
 void charout();
 void printcr();
 void readkb();
+void anykey();
 void setp();
 void bit_b_ix(byte b, byte d);
 void bit_b_iy(byte b, byte d);
