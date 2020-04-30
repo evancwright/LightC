@@ -19,4 +19,4 @@ light : $(OBJ)
 .PHONY: clean
 clean:
 	rm $(OBJ)
-	rm light.exe	
+	rm light	
