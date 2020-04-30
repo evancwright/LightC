@@ -116,7 +116,7 @@ int cfileexists(const char * filename){
 void RageDump()
 {
 	printf("\n");
-	printf("A:%2x  F:??\n", a, f);
+	printf("A:%2x  F:??\n", a);
 	printf("B:%2x  C:%2x\n", b, c);
 	printf("D:%2x  E:%2x\n", d, e);
 	printf("H:%2x  L:%2x\n", h, l);
