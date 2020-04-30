@@ -8,9 +8,10 @@ OBJ= main.o and.o add.o bios.o bit.o call.o \
 	cp.o ld.o ldir.o pop.o res.o shift.o \
 	sub.o regops.o execute.o
 	
+LIBS=-lm
 	
 light : $(OBJ)
-	cc -lm -o light $(OBJ) 
+	cc -o light $(OBJ) $(LIBS) 
 
 *.o : *.c $(SOURCE)
 	cc -c %.c
