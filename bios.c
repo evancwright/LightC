@@ -35,7 +35,8 @@ void save()
 	memset(buffer, 0, sizeof(char));
 	
 	//gets_s(buffer, 80);
-	gets(buffer);
+	//gets(buffer);
+	fgets(buffer, 80,stdin);
 	strcat(buffer,".sav");
 	FILE *fp = fopen(buffer, "wb");
 	fwrite(&Ram[hl], 1, size, fp);
@@ -58,8 +59,8 @@ void restore()
 	
 	printf("Enter save file name (without extension)\n");
 	memset(buffer, 0, sizeof(char));
-	gets(buffer);
-	//gets_s(buffer, 80);
+	//gets(buffer);
+	fgets(buffer, 80, stdin);
 	strcat(buffer,".sav");
 	
 	FILE *fp = fopen(buffer, "rb");
@@ -94,6 +95,11 @@ void printcr()
 	printf("\n");
 }
 
+void anykey()
+{
+	fgetc(stdin);
+}
+
 //reads chars into address stored in HL
 void readkb()
 {   
@@ -104,8 +110,8 @@ void readkb()
 	unsigned short hl = getHL();
 	
 	memset(buffer, 0, sizeof(char));
-	gets(buffer);
-	//gets_s(buffer, 80);
+	//gets(buffer);
+	fgets(buffer, 80, stdin);
 	len = strlen(buffer);
 	 
 	for (;  i < min(len,80); i++)

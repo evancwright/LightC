@@ -205,6 +205,7 @@ void execute()
 	else if (opcode == 0xD6) sub_n();
 	else if (opcode == 0xED79) charout();
 	else if (opcode == 0xED51) readkb();
+	else if (opcode == 0xED49) anykey();
 	else if (opcode == 0xEDB8) cls();
 	else if (opcode == 0xEDB3) printcr();
 	else if (opcode == 0xEDAB) status_line();
@@ -228,7 +229,7 @@ void fail(const char *msg)
 	RageDump();
 	exit(0);
 }
-
+/*
 void Test()
 {
 	sp = 100;
@@ -400,5 +401,5 @@ void Test()
 
 		printf("tests complete\n");
 		exit(0);
-
 }
+*/
