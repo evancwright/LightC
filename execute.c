@@ -217,14 +217,14 @@ void execute()
 	{
 		char buffer[80];
 		sprintf(buffer, "Unhandled op code %x at %x\n", opcode, pc);
-		printf(buffer);
+		printf("%s", buffer);
 		exit(0);
 	}
 }
 
 void fail(const char *msg)
 {
-	printf(msg);
+	printf("%s",msg);
 	RageDump();
 	exit(0);
 }
