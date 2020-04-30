@@ -10,7 +10,7 @@ OBJ= main.o and.o add.o bios.o bit.o call.o \
 	
 	
 light : $(OBJ)
-	cc -o light $(OBJ) 
+	cc -lm -o light $(OBJ) 
 
 *.o : *.c $(SOURCE)
 	cc -c %.c
