@@ -96,7 +96,7 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		printf("Usage: light gamefile");
+		printf("Usage: light gamefile\n");
 	}
 }
 
