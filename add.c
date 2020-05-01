@@ -34,7 +34,7 @@ void add_immediate()
 void add_r(byte rcode)
 {
 	byte b = Get8BitReg(rcode);
-	add8(ir[1]);
+	add8(b);
 }
 
 void add_a_n()
