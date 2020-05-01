@@ -1,6 +1,6 @@
 #include "vm.h"
-int HasImmediateWord(byte p, byte q, byte x, byte y, byte z);
-int HasImmediateByte(byte x, byte y, byte z);
+int HasImmediateWord(unsigned char p, unsigned char q, unsigned char x, unsigned char y, unsigned char z);
+int HasImmediateByte(unsigned char x, unsigned char y, unsigned char z);
 int PrefixedWith1Immediate();
 int IsPrefix();
 int PrefixedWith2Immediates();
@@ -11,37 +11,39 @@ extern unsigned short opcode;
 //Gets the instructions and operands
 void fetch()
 {
+	int i = 0;
+	unsigned char x, y, z, p, q;
+
 	//clear ir
-	for (int i = 0; i < 4; i++)
+	for (i = 0; i < 4; i++)
 		ir[i] = 0;
 
 	
 	ir[0] = GetByte(pc);
 	AdvancePC();
 
-	byte x, y, z, p, q;
 	//x is 2 highest bits
-	x = (byte)(ir[0] & (byte)0xC0);
+	x = (unsigned char)(ir[0] & (unsigned char)0xC0);
 
-	x = (byte)(x >> 6);
+	x = (unsigned char)(x >> 6);
 
 	//y = bits 5,4,3
-	y = (byte)(ir[0] & 0x38); /* 00111000 */
-	y = (byte)(y >> 3);
+	y = (unsigned char)(ir[0] & 0x38); /* 00111000 */
+	y = (unsigned char)(y >> 3);
 
 	//z = lowest three bits
-	z = (byte)(ir[0] & 0x07);
+	z = (unsigned char)(ir[0] & 0x07);
 
 	/*p is bits 4,5*/
-	p = (byte)(ir[0] & 0x30);
-	p = (byte)(p >> 4);
+	p = (unsigned char)(ir[0] & 0x30);
+	p = (unsigned char)(p >> 4);
 
 	/*q = bit 3*/
-	q = (byte)(ir[0] & 0x08);
-	q = (byte)(q >> 3);
+	q = (unsigned char)(ir[0] & 0x08);
+	q = (unsigned char)(q >> 3);
 
 	if (IsPrefix() == 0)
-	{//1 byte op code
+	{//1 unsigned char op code
 		opcode = ir[0];
 		if (HasImmediateByte(x, y, z))
 		{
@@ -87,11 +89,10 @@ void fetch()
 			AdvancePC();
 		}
 	}
-
 }
 
-//for 1 byte op codes
-int HasImmediateByte(byte x, byte y, byte z)
+//for 1 unsigned char op codes
+int HasImmediateByte(unsigned char x, unsigned char y, unsigned char z)
 {
 	if (x == 0)
 	{
@@ -106,8 +107,8 @@ int HasImmediateByte(byte x, byte y, byte z)
 	return 0;
 }
 
-//this is for 1 byte opcodes
-int HasImmediateWord(byte p, byte q, byte x, byte y, byte z)
+//this is for 1 unsigned char opcodes
+int HasImmediateWord(unsigned char p, unsigned char q, unsigned char x, unsigned char y, unsigned char z)
 {
 	if (x == 0)
 	{
@@ -136,10 +137,10 @@ int HasImmediateWord(byte p, byte q, byte x, byte y, byte z)
 	return 0;
 }
 
-/* return 1 if ir[0] is a prefix for a 2 byte op code */
+/* return 1 if ir[0] is a prefix for a 2 unsigned char op code */
 int IsPrefix()
 {
-	byte b = ir[0];
+	unsigned char b = ir[0];
 	if (b == 0xCB ||
 		b == 0xDD ||
 		b == 0xED ||

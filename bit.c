@@ -5,10 +5,11 @@ void and_immediate();
 
 void bit_b_ix(byte b, byte d)
 {
-	zeroBit = 0;
 	byte mask = (byte)pow(2, b);
 	byte mem = GetByte( (unsigned short)(ix+d));
 	mem = (byte)(mem & mask);
+
+	zeroBit = 0;
 
 	if (mem == 0)
 	{
@@ -18,11 +19,11 @@ void bit_b_ix(byte b, byte d)
 
 void bit_b_iy(byte b, byte d)
 {
-	zeroBit = 0;
 	byte mask = (byte)pow(2, b);
 	byte mem = GetByte((unsigned short)(iy+d));
 	mem = (byte)(mem & mask);
 
+	zeroBit = 0;
 	if (mem == 0)
 	{
 		zeroBit = 1;
@@ -40,12 +41,10 @@ void bit_b_hl(byte b)
 
 void bit_b_r(byte b, byte r)
 {
-	byte mem = 0;
-
-	mem = Get8BitReg(r);
+	byte mask = (byte)pow(2, b);
+	byte mem = Get8BitReg(r);
 
 	zeroBit = 0;
-	byte mask = (byte)pow(2, b);
 	
 	mem = (byte)(mem & mask);
 
@@ -69,8 +68,7 @@ void bit_ix_iy(unsigned short rr)
 	bit = (byte)(bit & 32); /* chop off highest 2 bits */
 	bit /= 8; /* right shift it two place */
 
-	byte b = GetByte(addr);
-	ir[1] = b;
+	ir[1] = GetByte(addr);
 	and_immediate();
 }
 
@@ -83,5 +81,3 @@ void bit_n_iy()
 {
 	bit_ix_iy(iy);
 }
-
-

@@ -26,7 +26,8 @@ char buffer[80];
 
 void save()
 {
-	 
+	FILE *fp = 0;
+	int len = 0;
 	unsigned short hl = getHL();
 	unsigned short de = getDE();
 	int size = de - hl;
@@ -37,11 +38,11 @@ void save()
 	//gets_s(buffer, 80);
 	//gets(buffer);
 	fgets(buffer, 80,stdin);
-	int len = strlen(buffer);
+	len = strlen(buffer);
 
 	buffer[len - 1] = 0;
 	strcat(buffer,".sav");
-	FILE *fp = fopen(buffer, "wb");
+	fp = fopen(buffer, "wb");
 	fwrite(&Ram[hl], 1, size, fp);
 	fclose(fp);
 	
@@ -55,7 +56,7 @@ void save()
 /// </summary>
 void restore()
 {
- 
+	FILE *fp = 0;
 	unsigned short hl = getHL();
 	unsigned short de = getDE();
 	int size = de - hl;
@@ -69,7 +70,7 @@ void restore()
 	buffer[len - 1] = 0;
 	strcat(buffer,".sav");
 	
-	FILE *fp = fopen(buffer, "rb");
+	fp = fopen(buffer, "rb");
 	if (fp != 0)
 	{
 		fread(&Ram[hl], 1, size, fp);

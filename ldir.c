@@ -56,8 +56,7 @@ void or_ix()
 {
 	unsigned short addr = ix;
 	addr += ir[2];
-	byte b = GetByte(addr);
-	or_a(b);
+	or_a(GetByte(addr));
 }
 
 /// <summary>
@@ -67,7 +66,6 @@ void or_iy()
 {
 	unsigned short addr = iy;
 	addr += ir[2];
-	byte b = GetByte(addr);
-	or_a(b);
+	or_a(GetByte(addr));
 }
 

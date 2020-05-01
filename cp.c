@@ -3,6 +3,10 @@
 
 void cp_immediate8(unsigned char val)
 {
+	unsigned int tempA;
+	unsigned int operand;
+	unsigned int result;
+
 	zeroBit = 0;
 	if (a == val)
 		zeroBit = 1;
@@ -12,11 +16,11 @@ void cp_immediate8(unsigned char val)
 		carryBit = 1;
 
 	//sign bit
-	unsigned int tempA = a;
-	unsigned int operand = val;
+	tempA = a;
+	operand = val;
 	operand = ~operand;
 	operand++;
-	unsigned int result = tempA + operand;
+	result = tempA + operand;
 	signBit = 0;
 	if ( (result & 0x0100) != 0)
 		signBit = 1;

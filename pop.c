@@ -10,63 +10,67 @@ void push_iy();
 
 void pop_rr(int rrcode)
 {
+	unsigned short lo = 0;
+	unsigned short hi = 0;
+	unsigned short temp = 0;
 	sp++;
-	unsigned short lo = GetByte(sp);
+	lo = GetByte(sp);
 	sp++;
-	unsigned short hi = GetByte(sp);
+	hi = GetByte(sp);
 	hi = hi << 8;
 	lo = 0x00FF & lo;
-	unsigned short temp = hi | lo;
+	temp = hi | lo;
 
-	if (rrcode == 0b00) setBC(temp);
-	else if (rrcode == 0b01) setDE(temp);
-	else if (rrcode == 0b10) setHL(temp);
-	else if (rrcode == 0b11) setAF(temp);
+	if (rrcode == 0) setBC(temp);
+	else if (rrcode == 1) setDE(temp);
+	else if (rrcode == 2) setHL(temp);
+	else if (rrcode == 3) setAF(temp);
 	 
 }
 
 void pop_ix()
 {
+	unsigned short lo = 0;
+	unsigned short hi = 0;
 	sp++;
-	unsigned char loc = GetByte(sp);
+	lo = GetByte(sp);
 	sp++;
-	unsigned char hic = GetByte(sp);
-
-	unsigned short hi = hic;
-	unsigned short lo = loc;
+	hi = GetByte(sp);
 
 	hi = hi << 8;
-	lo = 0x00FF & lo;
-	unsigned short temp = hi | lo;
 	
-	ix = temp;
+	ix = hi | lo;
 //	printf("pop ix. ix=%x  (%2x,%2x)\n", ix, hic, loc);
 }
 
 void pop_iy()
 {
+	unsigned short lo = 0;
+	unsigned short hi = 0;
+	
 	sp++;
-	unsigned short lo = GetByte(sp);
+	lo = GetByte(sp);
 	sp++;
-	unsigned short hi = GetByte(sp);
+	hi = GetByte(sp);
+	
 	hi = hi << 8;
-	lo = 0x00FF & lo;
-	unsigned short temp = hi | lo;
-
-	iy = temp;
+	
+	iy = hi | lo;
 }
 
 void push_rr(int rrcode)
 {
+	byte lo = 0;
+	byte hi = 0;
 	unsigned short reg = 0;
 
-	if (rrcode == 0b00) reg = getBC();
-	else if (rrcode == 0b01) reg = getDE();
-	else if (rrcode == 0b10) reg = getHL();
-	else if (rrcode == 0b11) reg = getAF();
+	if (rrcode == 0) reg = getBC();
+	else if (rrcode == 1) reg = getDE();
+	else if (rrcode == 2) reg = getHL();
+	else if (rrcode == 3) reg = getAF();
 	
-	byte lo = (byte)(reg % 256);
-	byte hi = (byte)(reg / 256);
+	lo = (byte)(reg % 256);
+	hi = (byte)(reg / 256);
 
 	WriteByte(sp,hi);
 	sp--;

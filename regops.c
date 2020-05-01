@@ -4,9 +4,10 @@
 
 unsigned short getAF()
 {
+	unsigned short lo = 0;
 	unsigned short hi = a;
 	hi = hi << 8;
-	unsigned short lo = f;
+	lo = f;
 	lo = lo & 0x00FF;
 	return hi | lo;
 }
@@ -14,29 +15,31 @@ unsigned short getAF()
 unsigned short getBC()
 {
 	unsigned short hi = b;
+	unsigned short lo = 0;
 	hi = hi << 8;
-	unsigned short lo = c;
+	lo = c;
 	lo = lo & 0x00FF;
 	return hi | lo;
 }
 
 unsigned short getDE()
 {
+	unsigned short lo = 0;
 	unsigned short hi = d;
 	hi = hi << 8;
-	unsigned short lo = e;
+	lo = e;
 	lo = lo & 0x00FF;
 	return hi | lo;
 }
 
 unsigned short getHL()
 {
+	unsigned short lo = 0;
 	unsigned short hi = h;
 	hi = hi << 8;
-	unsigned short lo = l;
+	lo = l;
 	lo = lo & 0x00FF;
-	unsigned short temp  = hi | lo;
-	return temp;
+	return hi | lo;
 }
 
 void setAF(unsigned short nn)
@@ -100,6 +103,7 @@ unsigned short GetReg16(int rrcode)
 		printf("Invalid rr code in GetReg16. pc = %x\n", pc);
 		exit(0);
 	}
+	return 0;
 }
 
 void SetReg16(int rrcode, unsigned short data)

@@ -3,8 +3,9 @@
 void call()
 {
 	//push the program counter
-	byte hi = (byte)(pc/256);
-	byte lo = (byte)(pc%256);
+	unsigned short newAddr = 0;
+	unsigned char hi = (byte)(pc/256);
+	unsigned char lo = (byte)(pc%256);
 
 	WriteByte(sp, hi);
 	sp--;
@@ -12,7 +13,7 @@ void call()
 	WriteByte(sp, lo);
 	sp--;
 
-	unsigned short newAddr = (unsigned short) (ir[2] * 256 + ir[1]);
+	newAddr = (unsigned short) (ir[2] * 256 + ir[1]);
 	pc = newAddr;
 }
 
@@ -66,11 +67,13 @@ void call_cc(byte cc)
 
 void ret()
 {
+	unsigned char lo=0, hi=0;
+	unsigned short newAddr = 0;
 	sp++;
-	byte lo = GetByte(sp);
+	lo = GetByte(sp);
 	sp++;
-	byte hi = GetByte(sp);
+	hi = GetByte(sp);
 
-	unsigned short newAddr = (unsigned short)(hi * 256 + lo);
+	newAddr = (unsigned short)(hi * 256 + lo);
 	pc = newAddr;
 }

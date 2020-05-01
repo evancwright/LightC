@@ -62,13 +62,10 @@ int main(int argc, char **argv)
 					exit(0);
 				}
 				
-				
 				fread(Ram,1,RamSize,fp);
 				fclose(fp);
 				
-				
 				//Test();
-
 
 				pc=0;
 				while (quitFlag == 0)
@@ -98,6 +95,7 @@ int main(int argc, char **argv)
 	{
 		printf("Usage: light gamefile\n");
 	}
+	return 0;
 }
 
 int cfileexists(const char * filename){
@@ -127,3 +125,4 @@ void RageDump()
 	printf("Zero=%d\n", zeroBit);
 	printf("Carry=%d\n", carryBit);
 }
+

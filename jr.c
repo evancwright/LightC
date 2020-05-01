@@ -45,3 +45,4 @@ void jrnz()
 {
 	jmprelcc(zeroBit == 0);
 }
+

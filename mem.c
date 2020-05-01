@@ -11,11 +11,11 @@ byte GetByte(unsigned short addr)
 	}
 	else
 	{
-		printf("OOB memory access (%x). PC=%x", addr, pc);
+		printf("OOB memory access (%x). PC=%x\n", addr, pc);
 		RageDump();
 		exit(0);
 	}
-   
+	return 0;
 }
 
 unsigned short GetWord(unsigned short addr)

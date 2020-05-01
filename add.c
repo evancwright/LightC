@@ -15,8 +15,9 @@ void add8(byte val)
 
 void add16(unsigned short *tgt, unsigned short src)
 {
+	unsigned long temp = (unsigned int)(*tgt + src);
+
 	carryBit = 0;
-	unsigned int temp = (unsigned int)(*tgt + src);
 	if (temp > 65535)
 	{
 		carryBit = 1;

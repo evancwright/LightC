@@ -37,12 +37,14 @@ void ld_a_hl()
 void ld_a_mm()
 {
 	unsigned short hi = ir[2];
-	hi = hi << 8;
 	unsigned short lo = ir[1];
+	unsigned short addr = 0;
+	unsigned char b = 0;
+	hi = hi << 8;
 	lo = lo & 0x00FF;
 
-	unsigned short addr = hi | lo;
-	byte b = GetByte(addr);
+	addr = hi | lo;
+	b = GetByte(addr);
 	SetReg8(0x07, b);
 }
 
@@ -51,25 +53,28 @@ void ld_mm_a()
 {
 	unsigned short hi = ir[2];
 	unsigned short lo = ir[1];
+	unsigned short addr = 0;
 	hi = hi << 8;
 	lo = lo & 0x00FF;
-	unsigned short addr = hi | lo;
+	addr = hi | lo;
 	WriteByte(addr, a);
 }
 
 void ld_r_ix(byte rcode)
 {
+	byte b = 0;
 	unsigned short addr = ix;
 	addr += ir[2];
-	byte b = GetByte(addr);
+	b = GetByte(addr);
 	SetReg8(rcode, b);
 }
 
 void ld_r_iy(byte rcode)
 {
 	unsigned short addr = iy;
+	byte b = 0;
 	addr += ir[2];
-	byte b = GetByte(addr);
+	b = GetByte(addr);
 	SetReg8(rcode, b);
 }
 
@@ -113,12 +118,16 @@ void ld_de_mm()
 {
 	unsigned short hi = ir[2];
 	unsigned short lo = ir[1];
+	unsigned short data = 0;
+	unsigned short temp = 0;
+	unsigned short addr = 0;
+	
 	hi = hi << 8;
 	lo = lo & 0x00FF;
-	unsigned short addr = hi | lo;
+	addr = hi | lo;
 
-	unsigned short data = GetWord(addr);
-	unsigned short temp = getDE();
+	data = GetWord(addr);
+	temp = getDE();
 	ld16(&temp, data);
 	setDE(temp);
 }
@@ -128,19 +137,22 @@ void ld_mm_rr(int rrcode)
 	unsigned short data = GetReg16(rrcode);
 	unsigned short hi = ir[3];
 	unsigned short lo = ir[2];
+	unsigned short addr = 0;
 	hi = hi << 8;
 	lo = lo & 0x00FF;
-	unsigned short addr = hi | lo;
+	addr = hi | lo;
 	WriteWord(addr, data);
 }
 
 void ld_mm_ix()
 {
 	unsigned short hi = ir[3];
-	unsigned short lo = ir[2];
+	unsigned short lo = ir[2]; 
+	unsigned short addr = 0;
+	
 	hi = hi << 8;
 	lo = lo & 0x00FF;
-	unsigned short addr = hi | lo;
+	addr = hi | lo;
 	WriteWord(addr,ix);
 }
 
@@ -148,9 +160,10 @@ void ld_mm_iy()
 {
 	unsigned short hi = ir[3];
 	unsigned short lo = ir[2];
+	unsigned short addr = 0;
 	hi = hi << 8;
 	lo = lo & 0x00FF;
-	unsigned short addr = hi | lo;
+	addr = hi | lo;
 	WriteWord(addr,iy);
 }
 
@@ -198,23 +211,23 @@ void ld_ix_mm()
 {
 	unsigned short hi = ir[3];
 	unsigned short lo = ir[2];
+	unsigned short addr = 0;
 	hi = hi << 8;
 	lo = lo & 0x00FF;
 //	unsigned short addr = (unsigned short)(ir[2]  + ir[3] * 256);
-	unsigned short addr = hi | lo;
-	unsigned short w = GetWord(addr);
-	ix = w;
+	addr = hi | lo;
+	ix = GetWord(addr);
 }
 
 void ld_iy_mm()
 {
 	unsigned short hi = ir[3];
 	unsigned short lo = ir[2];
+	unsigned short addr = 0;
 	hi = hi << 8;
 	lo = lo & 0x00FF;
-	unsigned short addr = hi | lo;
-	unsigned short w = GetWord(addr);
-	iy = w;
+	addr = hi | lo;
+	iy = GetWord(addr);
 }
 
 /* ld (ix+3),a */
@@ -252,11 +265,11 @@ void ld_sp_memory()
 {
 	unsigned short hi = ir[3];
 	unsigned short lo = ir[2];
+	unsigned short addr = 0;
 	hi = hi << 8;
 	lo = lo & 0x00FF;
-	unsigned short addr = hi | lo;
-	unsigned short val = GetWord(addr);
-	sp = val;
+	addr = hi | lo;
+	sp = GetWord(addr);
 }
 
 
@@ -271,9 +284,10 @@ void ld_mm_de()
 {
 	unsigned short hi = ir[2];
 	unsigned short lo = ir[1];
+	unsigned short addr = 0;
 	hi = hi << 8;
 	lo = lo & 0x00FF;
-	unsigned short addr = hi | lo;
+	addr = hi | lo;
 	WriteWord(addr, getDE());
 }
 
@@ -281,9 +295,10 @@ void ld_rr_nn(int rrcode)
 {
 	unsigned short hi = ir[2];
 	unsigned short lo = ir[1];
+	unsigned short data = 0;
 	hi = hi << 8;
 	lo = lo & 0x00FF;
-	unsigned short data = hi | lo;
+	data = hi | lo;
 	SetReg16(rrcode, data);
 }
 
@@ -291,9 +306,9 @@ void ld_rr_mm(int rrcode)
 {
 	unsigned short hi = ir[3];
 	unsigned short lo = ir[2];
+	unsigned short addr = 0;
 	hi = hi << 8;
 	lo = lo & 0x00FF;
-	unsigned short addr = hi | lo;
-	unsigned short data = GetWord(addr);
-	SetReg16(rrcode, data);
+	addr = hi | lo;
+	SetReg16(rrcode, GetWord(addr));
 }
