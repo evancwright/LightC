@@ -1,0 +1,27 @@
+SOURCE=main.c and.c add.c bios.c bit.o call.c \
+	dec.c decode.c inc.c jmp.c jr.c mem.c \
+	cp.c ld.c ldir.c res.c pop.c shift.c \
+	sub.c regops.c execute.c
+
+OBJ= main.obj and.obj add.obj bios.obj bit.obj call.obj \
+	dec.obj decode.obj inc.obj jmp.obj jr.obj mem.obj \
+	cp.obj ld.obj ldir.obj pop.obj res.obj shift.obj \
+	sub.obj regops.obj execute.obj
+	
+LIBS=
+
+CC=wcc
+LINKER=wcl
+CFLAGS= -0 -bt=DOS
+
+%.obj : %.c $(SOURCE)
+	wcc $(CFLAGS) $<
+
+light.exe : $(OBJ)
+	$(LINKER) -o $(OBJ) $(LIBS) 
+	mv main.exe light.exe
+
+.PHONY: clean
+clean:
+	rm $(OBJ)
+	rm light	
