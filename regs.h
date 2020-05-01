@@ -45,3 +45,4 @@ byte GetByte(unsigned short addr);
 extern unsigned char ir[4];
 
 #endif
+
