@@ -27,7 +27,7 @@ int quitFlag=0;
 unsigned char ir[4]; //instruction register
  
 unsigned char *Ram=0;
-int RamSize=0;
+size_t RamSize=0;
 int cfileexists(const char * filename);
 
 void execute();
@@ -36,6 +36,9 @@ void RageDump();
 
 int main(int argc, char **argv)
 { 
+	char step = 0;
+	FILE *fp = 0;
+
 	if (argc != 1)
 	{
 		if (cfileexists(argv[1]))
@@ -47,13 +50,13 @@ int main(int argc, char **argv)
 //			RamSize = buffer.st_size;
 			//load the file into "ram"
 			
-			FILE *fp = fopen(argv[1],"r");
+			fp = fopen(argv[1],"rb");
 			if (fp!=0)	
 			{
 				fseek(fp, 0, SEEK_END)+1;
 				RamSize = ftell(fp);
 				rewind(fp);
-		
+			//	fseek(fp, 0, SEEK_SET);
 				Ram = malloc(RamSize);
 				
 				if (Ram == 0)
@@ -62,7 +65,7 @@ int main(int argc, char **argv)
 					exit(0);
 				}
 				
-				fread(Ram,1,RamSize,fp);
+				RamSize = fread(Ram,1,RamSize,fp);
 				fclose(fp);
 				
 				//Test();
@@ -72,12 +75,14 @@ int main(int argc, char **argv)
 				{
 					fetch();
 					execute();
-					/*
-					if (pc == 0x0B89 || pc == 0x0B8C || pc == 0x0E0C || pc == 0x0E29)
+					
+				/*	if (step == 1 || pc == 0x0B15 || pc == 0x0B89 || pc == 0x0B8C || pc == 0x0E0C || pc == 0x0E29)
 					{
+						step = 1;
 						RageDump();
 						getc(stdin);
-					}*/
+					}
+					*/
 				}
 				free(Ram);
 			}
