@@ -1,4 +1,4 @@
-SOURCE=main.c and.c add.c bios.c bit.o call.c \
+SOURCE=main.c and.c add.c bios.c bit.c call.c \
 	dec.c decode.c inc.c jmp.c jr.c mem.c \
 	cp.c ld.c ldir.c res.c pop.c shift.c \
 	sub.c regops.c execute.c
@@ -15,6 +15,7 @@ LINKER=wcl
 CFLAGS= -0 -bt=DOS
 
 %.obj : %.c $(SOURCE)
+	echo "compiling..." $<
 	wcc $(CFLAGS) $<
 
 light.exe : $(OBJ)
