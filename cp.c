@@ -3,9 +3,9 @@
 
 void cp_immediate8(unsigned char val)
 {
-	unsigned int tempA;
-	unsigned int operand;
-	unsigned int result;
+	unsigned char tempA;
+	unsigned char operand;
+	unsigned char result;
 
 	zeroBit = 0;
 	if (a == val)
@@ -18,11 +18,11 @@ void cp_immediate8(unsigned char val)
 	//sign bit
 	tempA = a;
 	operand = val;
-	operand = ~operand;
+	operand = ~operand; //two's complement 
 	operand++;
 	result = tempA + operand;
 	signBit = 0;
-	if ( (result & 0x0100) != 0)
+	if ( (result & 0x80) != 0)
 		signBit = 1;
 }
 
@@ -54,9 +54,7 @@ void cp_hl()
 
 void cp_a_memory(unsigned short nn)
 {
-	unsigned short addr = nn;
-
-	unsigned char b = GetByte(addr);
+	unsigned char b = GetByte(nn);
 	cp_immediate8(b);
 }
 

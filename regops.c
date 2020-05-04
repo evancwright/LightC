@@ -132,7 +132,7 @@ void SetZeroAndSign8(byte c)
 		zeroBit = 1;
 
 	signBit = 0;
-	if ((c & 127) == 128)
+	if ((c & 0x80) == 0x80)
 		signBit = 1;
 }
 

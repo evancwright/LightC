@@ -261,11 +261,13 @@ void Test()
 	carryBit = 0;
 	a = 1;
 	c = 7;
-	cp_r(1);
+	cp_r(1); //reg c
 	if (carryBit == 0)
 	{
 		fail("cp 7 should have set carry bit!");
 	}
+
+
 
 	ix = 1;
 	inc_ix();

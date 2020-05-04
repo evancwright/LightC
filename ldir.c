@@ -19,7 +19,8 @@ void ldir()
 
 void neg()
 {
-	a = (byte)(~a);
+	a = (byte)(0-a);
+	SetZeroAndSign8(a);
 }
 
 void nop()
