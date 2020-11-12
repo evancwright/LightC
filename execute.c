@@ -220,6 +220,12 @@ void execute()
 	//sub
 	else if (byte1Upper5 == 0x90) sub_r(byte1Lower3); //0b10010000
 	else if (opcode == 0xD6) sub_n();
+	else if (opcode == 0xA8) xor(b);
+	else if (opcode == 0xA9) xor(c);
+	else if (opcode == 0xAA) xor(d);
+	else if (opcode == 0xAB) xor(e);
+	else if (opcode == 0xAC) xor(h);
+	else if (opcode == 0xAD) xor(l);
 	else if (opcode == 0xED79) charout();
 	else if (opcode == 0xED51) readkb();
 	else if (opcode == 0xED49) anykey();
