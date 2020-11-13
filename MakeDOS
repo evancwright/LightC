@@ -1,12 +1,12 @@
 SOURCE=main.c and.c add.c bios.c bit.c call.c \
 	dec.c decode.c inc.c jmp.c jr.c mem.c \
 	cp.c ld.c ldir.c res.c pop.c shift.c \
-	sub.c regops.c execute.c
+	sub.c regops.c execute.c xor.c
 
 OBJ= main.obj and.obj add.obj bios.obj bit.obj call.obj \
 	dec.obj decode.obj inc.obj jmp.obj jr.obj mem.obj \
 	cp.obj ld.obj ldir.obj pop.obj res.obj shift.obj \
-	sub.obj regops.obj execute.obj
+	sub.obj regops.obj execute.obj xor.obj
 	
 LIBS=
 
@@ -18,11 +18,11 @@ CFLAGS= -0 -bt=DOS
 	echo "compiling..." $<
 	wcc $(CFLAGS) $<
 
-light.exe : $(OBJ)
+light16.exe : $(OBJ)
 	$(LINKER) -o $(OBJ) $(LIBS) 
-	mv main.exe light.exe
+	mv main.exe light16.exe
 
 .PHONY: clean
 clean:
 	rm $(OBJ)
-	rm light	
+	rm light16.exe	

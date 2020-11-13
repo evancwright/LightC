@@ -207,9 +207,9 @@ extern unsigned short ix;
 extern unsigned short iy;
 extern unsigned short sp;
 extern unsigned short pc;
-extern char zeroBit;
-extern char carryBit;
-extern char signBit;
+extern unsigned char zeroBit;
+extern unsigned char carryBit;
+extern unsigned char signBit;
 extern byte ir[4]; //instruction register
 
 extern unsigned char *Ram;
