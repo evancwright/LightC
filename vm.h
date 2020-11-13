@@ -169,6 +169,7 @@ void srl_a();
 void sub8(byte op);
 void sub_n();
 void sub_r(byte rcode);
+void xor(byte b);
 
 void setAF(unsigned short);
 void setBC(unsigned short);
